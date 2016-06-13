@@ -1,10 +1,10 @@
 <template>
   <div id="main-item">
-    <h1>Today, {{* name }} learned:</h1>
+    <h1>Today, {{* username }} learned:</h1>
     <ol>
       <li>
         <em>{{ title }} in {{ category }}</em>
-        <p>{{ content }}</p>
+        <p>{{{ content }}}</p>
       </li>
     </ol>
   </div>
@@ -15,7 +15,7 @@ import store from '../store'
 
 export default {
   data () {
-    return store.state.mainItem
+    return store.state.items[0]
   }
 }
 </script>
