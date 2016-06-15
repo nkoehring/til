@@ -1,4 +1,5 @@
 import cfg from './config'
+import github from './github'
 
 const store = {
   state: {
@@ -12,41 +13,31 @@ const store = {
 function update() {
 
   if (!cfg.profile) {
-    console.log("no username…")
+    console.log("no profile loaded…")
     return
   }
 
-  const xhr = new XMLHttpRequest()
   const path = 'GithubAPI/get-rendered-files.md'
-  xhr.open('GET', `${cfg.apiRoot}/${cfg.profile}/todayIlearned/contents/${path}`)
+  const parts = path.split("/")
 
-  // nice direct way to get a rendered markdown file
-  xhr.setRequestHeader("Accept", `application/vnd.github.${cfg.apiVersion}.html`)
-
-  xhr.onload = () => {
-
-    if (xhr.status > 299) {
-      console.error("could not load", xhr.responseURL, xhr.statusText)
-      store.state.loaded = true
-      store.state.error = true
-      return
-    }
-
-    const parts = path.split("/")
+  github.renderedContent(path).then(content => {
 
     const username = "not yet known"
-    const content = xhr.responseText
     const category = parts.length === 2 ? parts[0] : "uncategorised"
     const title = parts.length === 2 ? parts[1] : parts[0]
 
-    let newItem = { username, category, title, content }
-    store.state.items.push(newItem)
-
+    store.state.items.push({ username, category, title, content })
     store.state.loaded = true
     store.state.error = false
-  }
 
-  xhr.send()
+  }).catch( response => {
+
+    console.error("could not load", response.url, response.statusText)
+    store.state.loaded = true
+    store.state.error = true
+
+  })
+
 }
 
 update()
