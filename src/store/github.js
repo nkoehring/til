@@ -10,10 +10,10 @@ const acceptType = {
 
 
 /**
-  * return promised XMLHTTPRequest
+  * return promised XMLHTTPRequest (we only need GET)
   *
-  * @param {method} String HTTP Verb (GET, POST, PATCH, PUT, DELETE)
   * @param {url} String URL to load
+  * @param {header} Object optional headers to send, defaults to {}
   * @return {Promise}
   */
 
@@ -56,7 +56,7 @@ function get(url, header={}) {
 /**
   * Fetch json encoded data for file path
   *
-  * @param {path} String path to file
+  * @param {url} String path to file
   * @return {Promise}
   */
 
