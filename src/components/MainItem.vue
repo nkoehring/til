@@ -1,6 +1,6 @@
 <template>
   <div id="main-item">
-    <h1>Today, {{* username }} learned:</h1>
+    <h1>Today, {{ contributors[0].name }} learned:</h1>
     <ol>
       <li>
         <em>{{ title }} in {{ category }}</em>

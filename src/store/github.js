@@ -120,4 +120,36 @@ function commitData(path) {
 }
 
 
-export default { json, rawContent, renderedContent, commitData, acceptType }
+/**
+  * Fetch commit data and map contributors
+  *
+  * @param {path} String path to file
+  * @return {Promise}
+  */
+
+function contributors(path) {
+
+  //TODO: think about caching of commit (and other json) data
+  return commitData(path).then(list => {
+    return list.map(entry => {
+      return {
+        name: entry.commit.author.name,
+        avatar: entry.author.avatar_url,
+        url: entry.author.html_url,
+        date: entry.commit.author.date,
+        message: entry.commit.message
+      }
+    })
+  })
+
+}
+
+
+export default {
+  json,
+  rawContent,
+  renderedContent,
+  commitData,
+  acceptType,
+  contributors
+}

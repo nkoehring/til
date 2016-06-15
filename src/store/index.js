@@ -18,23 +18,51 @@ function update() {
   }
 
   const path = 'GithubAPI/get-rendered-files.md'
-  const parts = path.split("/")
 
-  github.renderedContent(path).then(content => {
+  loadItem(path).then(item => {
 
-    const username = "not yet known"
-    const category = parts.length === 2 ? parts[0] : "uncategorised"
-    const title = parts.length === 2 ? parts[1] : parts[0]
-
-    store.state.items.push({ username, category, title, content })
+    store.state.items.push(item)
     store.state.loaded = true
     store.state.error = false
 
-  }).catch( response => {
+  }).catch( () => {
 
-    console.error("could not load", response.url, response.statusText)
     store.state.loaded = true
     store.state.error = true
+
+  })
+
+}
+
+
+/**
+  * load data for a single file and add it to items list
+  *
+  * @param {path} String path to file
+  * @return {Promise} that resolves to { author, category, title, content }
+  */
+
+function loadItem(path) {
+
+  const parts = path.split("/")
+  const item = {
+    category: parts.length === 2 ? parts[0] : "uncategorised",
+    title: parts.length === 2 ? parts[1] : parts[0]
+  }
+
+  const pContrib = github.contributors(path)
+  const pContent = github.renderedContent(path)
+
+  return Promise.all([pContrib, pContent]).then(data => {
+
+    item.contributors = data[0]
+    item.content = data[1]
+
+    return item
+
+  }).catch( data => {
+
+    console.error(`Fetching of ${path} failed`)
 
   })
 
