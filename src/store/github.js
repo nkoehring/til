@@ -64,11 +64,9 @@ function json(url) {
 
   const promise = get(url, {Accept: acceptType.json})
 
-  promise.then( response => {
+  return promise.then( response => {
     return JSON.parse(response.text)
   })
-
-  return promise
 
 }
 
