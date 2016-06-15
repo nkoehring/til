@@ -19,7 +19,7 @@ function update() {
   const xhr = new XMLHttpRequest()
   const path = 'GithubAPI/get-rendered-files.md'
   xhr.open('GET', `${cfg.apiRoot}/${cfg.profile}/todayIlearned/contents/${path}`)
-  
+
   // nice direct way to get a rendered markdown file
   xhr.setRequestHeader("Accept", `application/vnd.github.${cfg.apiVersion}.html`)
 
@@ -44,9 +44,9 @@ function update() {
 
     store.state.loaded = true
     store.state.error = false
-  };
+  }
 
-  xhr.send();
+  xhr.send()
 }
 
 update()

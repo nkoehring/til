@@ -12,7 +12,7 @@ import Hello from './components/Hello.vue'
 import MainItem from './components/MainItem.vue'
 import LoadError from './components/LoadError.vue'
 import store from './store'
-import config from './store'
+// import config from './store'
 
 export default {
   components: { Hello, MainItem, LoadError },
