@@ -1,5 +1,4 @@
 <template>
-  <h1 id="disclaimer">this application is just a working draft</h1>
   <div id="app">
     <hello v-if="!state.loaded"></hello>
     <load-error v-if="state.loaded && state.error"></load-error>
@@ -23,9 +22,25 @@ export default {
 </script>
 
 <style>
+
+  ::-webkit-scrollbar {
+    max-width: 10px;
+    max-height: 10px;
+    background: #222;
+  }
+  ::-webkit-scrollbar-corner,
+  ::-webkit-scrollbar-track {
+    background: #222;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: #444;
+    border-radius: 5px;
+  }
+
   body {
-    background: #EEE;
-    color: #444;
+    background: #222 url(bg.png) fixed left top;
+    color: #EEE;
     font-family: Helvetica, sans-serif;
     width: 100%;
     margin: 0;
@@ -34,39 +49,13 @@ export default {
 
   #app {
     width: 960px;
-    margin: 5em auto;
+    margin: 1em auto;
     padding: 1em 2em;
-    background: #DDD;
   }
 
-  h1 {
-    margin: 0;
+  a {
+    color: #48C;
+    text-decoration: none;
   }
 
-  #main-item {
-    border: 2px solid #444;
-    padding: 1em 2em;
-    background: #EEE;
-  }
-
-  #disclaimer {
-    display: block;
-    position: absolute;
-    top: 10px;
-    left: 0;
-    width: 100%;
-    text-align: center;
-    font-size: 3rem;
-    color: #888;
-  }
-  #disclaimer::before {
-    content: "disclaimer";
-    position: absolute;
-    top: -2rem;
-    left: -1rem;
-    text-align: left;
-    font-size: 6rem;
-    color: #CCC;
-    z-index: -1;
-  }
 </style>
