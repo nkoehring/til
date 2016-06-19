@@ -7,7 +7,7 @@
     </div>
     <ol>
       <li>
-        <em>{{ title }}</em> in <em>{{ category }}</em>
+        <em>{{ category }}</em> / <em>{{ title }}</em>
         <p>{{{ content }}}</p>
       </li>
     </ol>

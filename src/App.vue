@@ -40,7 +40,7 @@ export default {
 
   body {
     background: #222 url(bg.png) fixed left top;
-    color: #EEE;
+    color: #BBB;
     font-family: Helvetica, sans-serif;
     width: 100%;
     margin: 0;
